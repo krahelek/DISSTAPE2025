@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Odliczanie</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; }
+    #countdown { font-size: 48px; }
+  </style>
+</head>
+<body>
+  <h1>Odliczanie do wybranej godziny</h1>
+  <div id="countdown"></div>
+
+  <script>
+    // Ustaw datę docelową (rok, miesiąc -1, dzień, godzina, minuta, sekunda)
+    const targetDate = new Date(2025, 5, 9, 20, 0, 0); // 9 czerwca 2025, 20:00
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "Czas minął!";
+        return;
+      }
+
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        hours + "h " + minutes + "m " + seconds + "s";
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // od razu wywołaj
+  </script>
+</body>
+</html>
